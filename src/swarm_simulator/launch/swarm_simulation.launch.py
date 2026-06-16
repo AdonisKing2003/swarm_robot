@@ -78,7 +78,8 @@ def make_bridge(name: str):
             # odom: Gz -> ROS 2
             f"/model/{name}/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry",
             # scan: Gz -> ROS 2
-            f"/{name}/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+            f"/world/swarm_world/model/{name}/link/base_footprint/sensor/lidar/scan"
+            "@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
             # FIX: dùng /{name}/tf thay vì /tf global
             # Trước: "/tf@..." → Gazebo publish odom→base_footprint lên /tf global
             #         SLAM dưới /robot_0/ listen /robot_0/tf → không nhận được
@@ -96,6 +97,8 @@ def make_bridge(name: str):
         ros_arguments=[
             "--remap", f"/model/{name}/cmd_vel:=/{name}/cmd_vel",
             "--remap", f"/model/{name}/odometry:=/{name}/odom",
+            "--remap", f"/world/swarm_world/model/{name}/joint_state:=/{name}/joint_states",
+            "--remap", f"/world/swarm_world/model/{name}/link/base_footprint/sensor/lidar/scan:=/{name}/scan",
         ],
         output="screen",
     )

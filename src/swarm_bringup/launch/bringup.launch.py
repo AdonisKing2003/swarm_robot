@@ -29,5 +29,5 @@ def generate_launch_description():
 
     return LaunchDescription([
         sim_launch,
-        # nav2_launch,
+        nav2_launch,
     ])

@@ -242,8 +242,8 @@
   <!-- Differential Drive Controller (Gz Harmonic) -->
   <gazebo>
     <plugin
-      filename="gz-sim-diff-drive-system"
-      name="gz::sim::systems::DiffDrive">
+      filename="libignition-gazebo-diff-drive-system.so"
+      name="ignition::gazebo::systems::DiffDrive">
       <left_joint>front_left_wheel_joint</left_joint>
       <right_joint>front_right_wheel_joint</right_joint>
       <left_joint>rear_left_wheel_joint</left_joint>
@@ -260,20 +260,19 @@
       <odom_publish_frequency>30</odom_publish_frequency>
     </plugin>
     <plugin
-      filename="gz-sim-joint-state-publisher-system"
-      name="gz::sim::systems::JointStatePublisher">
+      filename="libignition-gazebo-joint-state-publisher-system.so"
+      name="ignition::gazebo::systems::JointStatePublisher">
     </plugin>
   </gazebo>
 
   <!-- Laser / LiDAR (Gz Harmonic) -->
   <gazebo reference="laser_link">
-    <sensor name="lidar" type="gpu_lidar">
+    <sensor name="lidar" type="gpu_ray">
       <always_on>true</always_on>
       <visualize>true</visualize>
       <update_rate>10</update_rate>
-      <topic>scan</topic>
       <gz_frame_id>laser_link</gz_frame_id>
-      <lidar>
+      <ray>
         <scan>
           <horizontal>
             <samples>360</samples>
@@ -292,7 +291,7 @@
           <mean>0.0</mean>
           <stddev>0.01</stddev>
         </noise>
-      </lidar>
+      </ray>
     </sensor>
   </gazebo>
 

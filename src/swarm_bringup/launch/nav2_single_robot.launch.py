@@ -136,8 +136,10 @@ def generate_launch_description():
                 ]},
             ],
         ),
-        # NOTE: slam_toolbox (async_slam_toolbox_node) is NOT a lifecycle node
-        # No lifecycle_manager_slam needed — the node starts automatically
+
+        # NOTE: async_slam_toolbox_node in this install does not expose the
+        # lifecycle get_state/change_state services, so no lifecycle_manager
+        # can manage it — it starts and publishes /map on its own.
     ])
 
     return LaunchDescription([
