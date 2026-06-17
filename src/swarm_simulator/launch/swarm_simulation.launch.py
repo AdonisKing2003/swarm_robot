@@ -85,7 +85,7 @@ def make_bridge(name: str):
             #         SLAM dưới /robot_0/ listen /robot_0/tf → không nhận được
             # Sau: "/{name}/tf@..." → Gazebo publish lên /robot_0/tf
             #       SLAM dưới /robot_0/ listen /robot_0/tf → nhận đúng
-            f"/{name}/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V",
+            f"/model/{name}/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V",
             # f"/world/swarm_world/dynamic_pose/info@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V",
             # joint_state
             f"/world/swarm_world/model/{name}/joint_state" 
@@ -97,6 +97,7 @@ def make_bridge(name: str):
         ros_arguments=[
             "--remap", f"/model/{name}/cmd_vel:=/{name}/cmd_vel",
             "--remap", f"/model/{name}/odometry:=/{name}/odom",
+            "--remap", f"/model/{name}/tf:=/{name}/tf",
             "--remap", f"/world/swarm_world/model/{name}/joint_state:=/{name}/joint_states",
             "--remap", f"/world/swarm_world/model/{name}/link/base_footprint/sensor/lidar/scan:=/{name}/scan",
         ],

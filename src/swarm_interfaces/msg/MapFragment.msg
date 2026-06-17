@@ -1,0 +1,3 @@
+std_msgs/Header header
+string robot_id
+nav_msgs/OccupancyGrid fragment
