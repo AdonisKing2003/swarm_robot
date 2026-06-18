@@ -80,6 +80,9 @@ def generate_launch_description():
             ('/tf',        '/robot_0/tf'),
             ('/tf_static', '/robot_0/tf_static'),
             ('scan',       'scan'),
+            ('/map',       'map'),
+            ('/map_metadata', 'map_metadata'),
+            ('/map_updates',  'map_updates'),
         ],
         output="screen",
     )])

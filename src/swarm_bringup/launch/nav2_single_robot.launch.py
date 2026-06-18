@@ -56,11 +56,13 @@ def generate_launch_description():
                 {"use_sim_time": True},
             ],
             remappings=[
-                ('/tf',         'tf'),
-                ('/tf_static',  'tf_static'),
-                ('scan',        'scan'),
-                ('map',         'map')
-,            ],
+                ('/tf',           'tf'),
+                ('/tf_static',    'tf_static'),
+                ('scan',          'scan'),
+                ('/map',          'map'),
+                ('/map_metadata', 'map_metadata'),
+                ('/map_updates',  'map_updates'),
+            ],
         ),
 
         # --- BT(behavior tree) Navigator ---
@@ -82,7 +84,7 @@ def generate_launch_description():
             package="nav2_planner",
             executable="planner_server",
             name="planner_server",
-            parameters=[params_file, {"use_sime_time": True}],
+            parameters=[params_file, {"use_sim_time": True}],
             remappings=[
                 ("/tf",         "tf"),
                 ("/tf_static",  "tf_static"),
@@ -137,9 +139,6 @@ def generate_launch_description():
             ],
         ),
 
-        # NOTE: async_slam_toolbox_node in this install does not expose the
-        # lifecycle get_state/change_state services, so no lifecycle_manager
-        # can manage it — it starts and publishes /map on its own.
     ])
 
     return LaunchDescription([
