@@ -118,7 +118,12 @@ def make_rviz(name: str):
         parameters=[{'use_sim_time': True}],
         remappings=[
             ('/tf',         f'/{name}/tf'),
-            ('/tf_static',  f'/{name}/tf_static')
+            ('/tf_static',  f'/{name}/tf_static'),
+            ('/map',        f'/{name}/map'),
+            ('/navigate_to_pose', f'/{name}/navigate_to_pose'),
+            ('/navigate_through_poses', f'/{name}/navigate_through_poses'),
+            ('/goal_pose',  f'/{name}/goal_pose'),
+            ('/initialpose', f'/{name}/initialpose'),
         ],
         output='screen',
     )
