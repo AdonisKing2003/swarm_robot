@@ -19,9 +19,9 @@ from ament_index_python.packages import get_package_share_directory
 # Setup x_pose, y_pose match position spawn in simulator
 ROBOTS = [
     {"name": "robot_0", "x_pose":  2.0,  "y_pose":  2.0},
-    # {"name": "robot_1", "x_pose": -2.0,  "y_pose":  2.0},
-    # {"name": "robot_2", "x_pose":  2.0,  "y_pose": -2.0},
-    # {"name": "robot_3", "x_pose": -2.0,  "y_pose": -2.0},
+    {"name": "robot_1", "x_pose": -2.0,  "y_pose":  2.0},
+    {"name": "robot_2", "x_pose":  2.0,  "y_pose": -2.0},
+    {"name": "robot_3", "x_pose": -2.0,  "y_pose": -2.0},
 ]
 
 # Delay between each robot (seconds) to avoid disputes TF
