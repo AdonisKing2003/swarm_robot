@@ -14,6 +14,12 @@ find_package(geometry_msgs REQUIRED)
 
 find_package(swarm_interfaces REQUIRED)
 
+add_executable(flocking_node src/flocking_node.cpp)
+ament_target_dependencies(flocking_node rclcpp geometry_msgs nav_msgs)
+target_include_directories(flocking_node PUBLIC include)
+
+install(TARGETS flocking_node DESTINATION lib/${PROJECT_NAME})
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
