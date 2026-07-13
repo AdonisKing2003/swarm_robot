@@ -11,12 +11,25 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 
 find_package(swarm_interfaces REQUIRED)
 
 add_executable(flocking_node src/flocking_node.cpp)
-ament_target_dependencies(flocking_node rclcpp geometry_msgs nav_msgs)
+ament_target_dependencies(flocking_node 
+  rclcpp 
+  geometry_msgs 
+  nav_msgs 
+  tf2_ros 
+  tf2 
+  tf2_geometry_msgs
+)
 target_include_directories(flocking_node PUBLIC include)
+target_link_libraries(flocking_node
+  tf2_geometry_msgs::tf2_geometry_msgs
+)
 
 install(TARGETS flocking_node DESTINATION lib/${PROJECT_NAME})
 
