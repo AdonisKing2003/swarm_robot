@@ -56,6 +56,7 @@ struct Vec2 {
         if (len > max_length && len > 1e-6) { /* avoid division by zero */
             return (*this) * (max_length / len);
         }
+        return *this;
     }
 };
 
@@ -183,7 +184,7 @@ class BoidsCore {
             for (const auto& n : neighbors) {
                 double dist = (my_pos - n.pos).length();
                 if (dist > 0.0 && dist < radius) {
-                    nearby_positions.push_back(n.vel);
+                    nearby_positions.push_back(n.pos);
                 }
             }
 

@@ -79,7 +79,7 @@ class FlockingNode : public rclcpp::Node {
 
             /* === Control loop timer (10Hz) === */
             control_timer_ = this->create_wall_timer(
-                std::chrono::microseconds(100),
+                std::chrono::milliseconds(100),
                 std::bind(&FlockingNode::compute_and_publish, this)
             );
 
