@@ -106,7 +106,7 @@ def launch_setup(context, *args, **kwargs):
             parameters=[params_file, {"use_sim_time": True}],
             remappings=[
                 ("scan",    "scan"),
-                ("cmd_vel", "cmd_vel"),
+                ("cmd_vel", "cmd_vel_nav"),
                 ("odom",    "odom"),
             ],
         ),

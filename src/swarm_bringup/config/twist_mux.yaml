@@ -1,0 +1,11 @@
+/**:
+    ros__parameters:
+      topics:
+        navigation:
+          topic: cmd_vel_nav
+          timeout: 0.5          # if nav stops publishing for 0.5s, drop it
+          priority: 100         # highest -> nav wins when active
+        flocking:
+          topic: cmd_vel_flocking
+          timeout: 0.5
+          priority: 10          # lower -> only used when nav is silent

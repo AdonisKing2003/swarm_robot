@@ -184,6 +184,33 @@ def make_world_to_map_tf(name: str, x: float, y: float, yaw_deg: float):
         output='screen',
     )
 
+
+def make_twist_mux(name: str):
+    """
+    Per-robot velocity multiplexer.
+
+    Flocking and Nav2 each publish to their own topic; twist_mux arbitrates by
+    priority and forwards the winner to /{name}/cmd_vel (what the Gz bridge
+    consumes). Neither behavior writes cmd_vel directly.
+
+    Namespaced to {name} so the config's relative topics resolve per robot:
+      cmd_vel_nav      -> /{name}/cmd_vel_nav
+      cmd_vel_flocking -> /{name}/cmd_vel_flocking
+      cmd_vel_out      -> /{name}/cmd_vel   (via remap below)
+    """
+    twist_mux_yaml = os.path.join(
+        get_package_share_directory("swarm_bringup"), "config", "twist_mux.yaml")
+    return Node(
+        package="twist_mux",
+        executable="twist_mux",
+        name="twist_mux",
+        namespace=name,
+        parameters=[twist_mux_yaml, {"use_sim_time": True}],
+        remappings=[("cmd_vel_out", "cmd_vel")],
+        output="screen",
+    )
+
+
 def generate_launch_description():
     actions = []
 
@@ -227,7 +254,11 @@ def generate_launch_description():
     for name, x, y, yaw in ROBOTS:
         actions.append(make_world_to_map_tf(name, x, y, yaw))
 
-    # 6. One RViz for the whole swarm (delay after bridge)
+    # 6. Per-robot twist_mux: arbitrate cmd_vel_nav / cmd_vel_flocking -> cmd_vel
+    for name, x, y, yaw in ROBOTS:
+        actions.append(make_twist_mux(name))
+
+    # 7. One RViz for the whole swarm (delay after bridge)
     actions.append(
         TimerAction(period=10.0, actions=[make_rviz()])
     )

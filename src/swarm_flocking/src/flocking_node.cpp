@@ -82,7 +82,7 @@ class FlockingNode : public rclcpp::Node {
 
             /* === Publisher === */
             cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>(
-                "/" + robot_id_ + "/cmd_vel", 10);
+                "/" + robot_id_ + "/cmd_vel_flocking", 10);
 
             /* === Control loop timer (10Hz) === */
             control_timer_ = this->create_wall_timer(
